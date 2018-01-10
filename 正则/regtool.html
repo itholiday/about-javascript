@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		function $(id){
+			return document.getElementById(id);
+		}
+		window.onload = function(){
+			$('test').onclick = function(){
+				var inStr = $('inStr').value;
+				var regStr = $('regStr').value;
+				var modeStr = $('modeStr').value;
+				var reg = new RegExp(regStr,modeStr);
+				$('output').value = reg.test(inStr);
+			}
+			$('exec').onclick = function(){
+				var inStr = $('inStr').value;
+				var regStr = $('regStr').value;
+				var modeStr = $('modeStr').value;
+				var reg = new RegExp(regStr,modeStr);
+				var arr = reg.exec(inStr);
+				var output = '';
+				for(var i=0;i<arr.length;i++){
+					output += arr[i] + '\n';
+				}
+				$('output').value = output;
+			}
+			$('search').onclick = function(){
+				var inStr = $('inStr').value;
+				var regStr = $('regStr').value;
+				var modeStr = $('modeStr').value;
+				var reg = new RegExp(regStr,modeStr);
+				var index = inStr.search(reg);
+				$('output').value = index;
+			}
+			$('match').onclick = function(){
+				var inStr = $('inStr').value;
+				var regStr = $('regStr').value;
+				var modeStr = $('modeStr').value;
+				var reg = new RegExp(regStr,modeStr);
+				var arr = inStr.match(reg);
+				var output = '';
+				for(var i=0;i<arr.length;i++){
+					output += arr[i] + '\n';
+				}
+				$('output').value = output;
+			}
+			$('replace').onclick = function(){
+				var inStr = $('inStr').value;
+				var regStr = $('regStr').value;
+				var modeStr = $('modeStr').value;
+				var replaceStr = $('replaceStr').value;
+				var reg = new RegExp(regStr,modeStr);
+				$('output').value = inStr.replace(reg,replaceStr);
+			}
+			$('split').onclick = function(){
+				var inStr = $('inStr').value;
+				var regStr = $('regStr').value;
+				var modeStr = $('modeStr').value;
+				var reg = new RegExp(regStr,modeStr);
+				var arr = inStr.split(reg);
+				var output = '';
+				for(var i=0;i<arr.length;i++){
+					output += arr[i] + '\n';
+				}
+				$('output').value = output;
+			}
+		}
+	</script>
+</head>
+<body>
+	输入字符串：<input type="input" id="inStr"><br>
+	正则表达式：<input type="input" id="regStr">模式匹配：<input type="input" id="modeStr"><br>
+	替换  内容：<input type="input" id="replaceStr"><br>
+	函数  输出：<textarea name="" id="output" cols="30" rows="10"></textarea><br>
+	函数：<button id="test">test()</button>
+	<button id="exec">exec()</button>
+	<button id="search">search()</button>
+	<button id="match">match()</button>
+	<button id="replace">replace()</button>
+	<button id="split">split()</button>
+</body>
+</html>

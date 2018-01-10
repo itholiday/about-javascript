@@ -1,0 +1,5 @@
+Math.random()
+new Date().getTime()
+xhr.setRequestHeader('If-Modified-Since','0');
+
+header('Cache-Control:no-cache,must-revalidate');

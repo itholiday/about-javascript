@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>第1道代码题</title>
+<style>
+	*{margin:0;padding:0;list-style:none;}
+	.content{ margin:10px 20px;}
+	h5{font-size:14px;line-height:30px;height:30px;color:green;}
+	.box1 input{width:200px;height:20px;line-height:20px;border:1px solid green;border-radius:5px;}
+	p{height:30px;width:200px;font-size:14px;color:#BC4442;}
+	.sub{width:60px;height:30px;background-color:#3277B3;border:1px solid #3277B3;color:white;border-radius:5px;}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script>
+/****************请在此编写js代码*******************/
+var q;
+$(function(){
+	$(':input').bind('blur',function(){
+		var u = $('#username').val();
+		var e = $('#email').val();
+		var p = $('#pass').val();
+		// console.log(u);
+		//置空
+		q = 0;
+		$('#username').next('p').html('');
+		$('#email').next('p').html('');
+		$('#pass').next('p').html('');
+		//用户名验证
+		if(u == ''){
+			$('#username').next('p').html('<font>用户名不能为空</font>');
+			q++;
+		}else if(u.length < 4 || u.length > 10){
+			$('#username').next('p').html('<font>用户名长度不符合规范</font>');
+			q++;
+		}
+		//邮箱验证
+		var reg = /^\w+([-+.]\w+)*@\w+([.-]\w+)*\.\w+(\.\w+)*$/gi;
+		if(e == '') {
+			$('#email').next('p').html('<font>邮箱不能为空</font>');
+			q++;
+		}else if(!reg.test(e)){
+			$('#email').next('p').html('<font>邮箱不符合规范</font>');
+			q++;
+		}
+		//密码验证
+		if(p == ''){
+			$('#pass').next('p').html('<font>密码不能为空</font>');
+			q++;
+		}else if(p.length <= 6){
+			$('#pass').next('p').html('<font>密码长度不符合规范</font>');
+			q++;
+		}
+	});
+	$('form').bind('submit',function(){
+		if(q){
+			alert('表单填写不规范！');
+			return false;
+		}
+	});
+});
+
+
+</script>
+</head>
+<body>
+	<form action="register.php" method="post" id="form">
+	<div class="content">
+		<h5>用户名</h5>
+		<div class="box1">
+			<input type="text" name="username" id="username" /><p></p>
+		</div>
+		<h5>电子邮箱</h5>
+		<div class="box1">
+			<input type="text" name="email" id="email" /><p></p>
+		</div>		
+		<h5>密码</h5>
+		<div class="box1">
+			<input type="password" name="pass" id="pass" /><p></p>
+		</div>
+		<br/>
+		<input type="submit" value="注册" class="sub" />
+	</div>
+	</form>
+
+</body>
+</html>

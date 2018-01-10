@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../public_completed/public.js"></script>
+	<script type="text/javascript">
+	window.onload = function(){
+		//设置背景颜色为黑色
+		document.bgColor = 'black';
+		setInterval('addStar()',1000);
+	}
+	function addStar(){
+		var img = document.createElement('img');
+		document.body.appendChild(img);
+		img.setAttribute('src','star.png');
+		img.setAttribute('width',getRandom(25,45));
+		img.setAttribute('height',getRandom(25,45));
+		var x = getRandom(0,window.innerWidth);
+		var y = getRandom(0,window.innerHeight);
+		img.setAttribute('style','position:absolute;left:'+x+'px;top:'+y+'px;');
+		img.setAttribute('onclick','removeStar(this)');
+	}
+	function getRandom(min,max){
+		return Math.floor(Math.random()*(max-min+1)+min);
+	}
+	function removeStar(obj){
+		document.body.removeChild(obj);
+	}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

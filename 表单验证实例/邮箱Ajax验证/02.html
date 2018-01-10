@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>第２道代码题</title>
+<style>
+	span{color: red;}
+</style>
+<script>
+/**************请在此处编写js代码****************/
+function $(id){
+	return document.getElementById(id);
+}
+function xhrInit(){
+	try{
+		return new ActiveXObject('Microsoft.XMLHTTP');
+	}catch(e){}
+	try{
+		return new XMLHttpRequest();
+	}catch(e){}
+	return null;
+}
+
+function checkEmail(email){
+	var xhr = xhrInit();
+	// console.log(email);
+	var msg = xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var msg = xhr.responseText;
+			if(!msg){
+				$('tip').innerHTML = '<font color="red">邮箱已被占用,重新尝试</font>';
+			}else{
+				$('tip').innerHTML = '<font color="green">邮箱可以使用</font>';
+			}
+		}
+	}
+	var time = new Date().getTime();
+	// alert(email);
+	xhr.open('get','02.php?e='+email+'&_='+time);
+	xhr.send(null);
+}
+window.onload = function(){
+	$('email').onblur = function(){
+		var v = $('email').value;
+		// console.log(v);
+		$('tip').innerHTML = '';
+		var reg = /^\w+([-+.]\w+)*@\w+([.-]\w+)*\.\w+(\.\w+)*$/gi;
+		if(v == ''){
+			$('tip').innerHTML = '<font color="red">邮箱不能为空</font>';
+		}else if(!reg.test(v)){
+			$('tip').innerHTML = '<font color="red">邮箱格式不正确</font>';
+		}else{
+			$('tip').innerHTML = '<img src="load.gif"/>';
+			checkEmail(v);
+		}
+	}
+}
+
+
+</script>
+</head>
+<body>
+	邮　箱：<input type='text' id='email' size='30' /><span id='tip'></span>
+</body>
+</html>
